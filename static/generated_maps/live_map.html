@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_c6a44b537d0dbf3a38f7f697f6b7b661 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_c6a44b537d0dbf3a38f7f697f6b7b661" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_c6a44b537d0dbf3a38f7f697f6b7b661 = L.map(
+                "map_c6a44b537d0dbf3a38f7f697f6b7b661",
+                {
+                    center: [17.6896, 83.2185],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+  "drawControl": false,
+  "measureControl": false,
+  "drawExport": false,
+  "layersControl": true,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_c6a44b537d0dbf3a38f7f697f6b7b661);
+
+            
+
+        
+    
+            var tile_layer_38e70c2b9e01b032146d95f00a568777 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 24,
+  "maxNativeZoom": 24,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_38e70c2b9e01b032146d95f00a568777.addTo(map_c6a44b537d0dbf3a38f7f697f6b7b661);
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topleft",
+  "title": "Full Screen",
+  "titleCancel": "Exit Full Screen",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_c6a44b537d0dbf3a38f7f697f6b7b661);
+        
+    
+
+            var geocoderOpts_geocoder_8254f78b6a5552b0ade67468c0d70b2f = {
+  "collapsed": true,
+  "position": "topleft",
+  "defaultMarkGeocode": true,
+  "zoom": 11,
+  "provider": "nominatim",
+  "providerOptions": {
+},
+};
+
+            // note: geocoder name should start with lowercase
+            var geocoderName_geocoder_8254f78b6a5552b0ade67468c0d70b2f = geocoderOpts_geocoder_8254f78b6a5552b0ade67468c0d70b2f["provider"];
+
+            var customGeocoder_geocoder_8254f78b6a5552b0ade67468c0d70b2f = L.Control.Geocoder[ geocoderName_geocoder_8254f78b6a5552b0ade67468c0d70b2f ](
+                geocoderOpts_geocoder_8254f78b6a5552b0ade67468c0d70b2f['providerOptions']
+            );
+            geocoderOpts_geocoder_8254f78b6a5552b0ade67468c0d70b2f["geocoder"] = customGeocoder_geocoder_8254f78b6a5552b0ade67468c0d70b2f;
+
+            L.Control.geocoder(
+                geocoderOpts_geocoder_8254f78b6a5552b0ade67468c0d70b2f
+            ).on('markgeocode', function(e) {
+                var zoom = geocoderOpts_geocoder_8254f78b6a5552b0ade67468c0d70b2f['zoom'] || map_c6a44b537d0dbf3a38f7f697f6b7b661.getZoom();
+                map_c6a44b537d0dbf3a38f7f697f6b7b661.setView(e.geocode.center, zoom);
+            }).addTo(map_c6a44b537d0dbf3a38f7f697f6b7b661);
+
+        
+    
+            map_c6a44b537d0dbf3a38f7f697f6b7b661.fitBounds(
+                [[17.6896, 83.2185], [17.6896, 83.2185]],
+                {"maxZoom": 6}
+            );
+        
+    
+            var marker_b8fa1e95188685b91bf08165936788e4 = L.marker(
+                [17.6896, 83.2185],
+                {
+  "iconColor": "blue",
+}
+            ).addTo(map_c6a44b537d0dbf3a38f7f697f6b7b661);
+        
+    
+        var popup_bc3cf7245987d1efc2b149c8ec48ba2b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_52ca1054312ec45c5825e6f376101146 = $(`<div id="html_52ca1054312ec45c5825e6f376101146" style="width: 100.0%; height: 100.0%;">Search Center Target Location</div>`)[0];
+                popup_bc3cf7245987d1efc2b149c8ec48ba2b.setContent(html_52ca1054312ec45c5825e6f376101146);
+            
+        
+
+        marker_b8fa1e95188685b91bf08165936788e4.bindPopup(popup_bc3cf7245987d1efc2b149c8ec48ba2b)
+        ;
+
+        
+    
+    
+            var marker_e7b7997261261ad1f5504a5267fd7a8b = L.marker(
+                [17.6896, 83.2185],
+                {
+  "iconColor": "red",
+}
+            ).addTo(map_c6a44b537d0dbf3a38f7f697f6b7b661);
+        
+    
+        var popup_7c70fe4ebdbf4693309b34b6b554f9f7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5fe22587a13cc66a20bb76d8fb53e1b0 = $(`<div id="html_5fe22587a13cc66a20bb76d8fb53e1b0" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 170px; line-height: 1.4;">             <h4 style="margin:0 0 3px 0; color:#ff3e3e;">Ravi Kumar (O+)</h4>             <span style="display:inline-block; font-size:10px; padding:2px 5px; background:#f2f2f2; border-radius:3px; margin-bottom:5px; font-weight:bold;">                 👑 Life Saver Elite             </span><br>             <b>Distance:</b> 0.0 km<br>             <a href="/donor/2" target="_blank" style="display:inline-block; margin-top:6px; background:#222; color:white; text-decoration:none; padding:5px; border-radius:4px; font-size:11px; text-align:center; width:90%; font-weight:bold;">                 👤 View Full Profile             </a>             <button onclick="window.parent.drawRoute(17.6896, 83.2185, 17.6896, 83.2185)"                      style="margin-top:5px; background:#ff3e3e; color:white; border:none; padding:5px; border-radius:4px; cursor:pointer; font-size:11px; width:100%; font-weight:bold;">                 🗺️ Plot Drive Route             </button>         </div>         </div>`)[0];
+                popup_7c70fe4ebdbf4693309b34b6b554f9f7.setContent(html_5fe22587a13cc66a20bb76d8fb53e1b0);
+            
+        
+
+        marker_e7b7997261261ad1f5504a5267fd7a8b.bindPopup(popup_7c70fe4ebdbf4693309b34b6b554f9f7)
+        ;
+
+        
+    
+    
+            var marker_b775c75441f801ab928e88d9f11aa6c2 = L.marker(
+                [17.683440204834252, 83.19768855621548],
+                {
+  "iconColor": "red",
+}
+            ).addTo(map_c6a44b537d0dbf3a38f7f697f6b7b661);
+        
+    
+        var popup_7e71546ee33441a79acf2cf02122bc4c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_03c87eb7221fcadfc27a6dfab79a3219 = $(`<div id="html_03c87eb7221fcadfc27a6dfab79a3219" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 170px; line-height: 1.4;">             <h4 style="margin:0 0 3px 0; color:#ff3e3e;">user (B+)</h4>             <span style="display:inline-block; font-size:10px; padding:2px 5px; background:#f2f2f2; border-radius:3px; margin-bottom:5px; font-weight:bold;">                 🌱 New Donor             </span><br>             <b>Distance:</b> 2.31 km<br>             <a href="/donor/7" target="_blank" style="display:inline-block; margin-top:6px; background:#222; color:white; text-decoration:none; padding:5px; border-radius:4px; font-size:11px; text-align:center; width:90%; font-weight:bold;">                 👤 View Full Profile             </a>             <button onclick="window.parent.drawRoute(17.6896, 83.2185, 17.683440204834252, 83.19768855621548)"                      style="margin-top:5px; background:#ff3e3e; color:white; border:none; padding:5px; border-radius:4px; cursor:pointer; font-size:11px; width:100%; font-weight:bold;">                 🗺️ Plot Drive Route             </button>         </div>         </div>`)[0];
+                popup_7e71546ee33441a79acf2cf02122bc4c.setContent(html_03c87eb7221fcadfc27a6dfab79a3219);
+            
+        
+
+        marker_b775c75441f801ab928e88d9f11aa6c2.bindPopup(popup_7e71546ee33441a79acf2cf02122bc4c)
+        ;
+
+        
+    
+    
+            var marker_1a91a2d9c79e794387ec99cf530fd561 = L.marker(
+                [17.675, 83.19],
+                {
+  "iconColor": "red",
+}
+            ).addTo(map_c6a44b537d0dbf3a38f7f697f6b7b661);
+        
+    
+        var popup_fcf9ffffe8e7fd7904136e892e4b8dad = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0f257d7a64b019444273c8f8a65d65dc = $(`<div id="html_0f257d7a64b019444273c8f8a65d65dc" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 170px; line-height: 1.4;">             <h4 style="margin:0 0 3px 0; color:#ff3e3e;">Mounika P. (O+)</h4>             <span style="display:inline-block; font-size:10px; padding:2px 5px; background:#f2f2f2; border-radius:3px; margin-bottom:5px; font-weight:bold;">                 🌱 New Donor             </span><br>             <b>Distance:</b> 3.43 km<br>             <a href="/donor/5" target="_blank" style="display:inline-block; margin-top:6px; background:#222; color:white; text-decoration:none; padding:5px; border-radius:4px; font-size:11px; text-align:center; width:90%; font-weight:bold;">                 👤 View Full Profile             </a>             <button onclick="window.parent.drawRoute(17.6896, 83.2185, 17.675, 83.19)"                      style="margin-top:5px; background:#ff3e3e; color:white; border:none; padding:5px; border-radius:4px; cursor:pointer; font-size:11px; width:100%; font-weight:bold;">                 🗺️ Plot Drive Route             </button>         </div>         </div>`)[0];
+                popup_fcf9ffffe8e7fd7904136e892e4b8dad.setContent(html_0f257d7a64b019444273c8f8a65d65dc);
+            
+        
+
+        marker_1a91a2d9c79e794387ec99cf530fd561.bindPopup(popup_fcf9ffffe8e7fd7904136e892e4b8dad)
+        ;
+
+        
+    
+    
+            var marker_6dde545ac21ee6f34ba04eb75ddbc5ef = L.marker(
+                [17.725, 83.295],
+                {
+  "iconColor": "red",
+}
+            ).addTo(map_c6a44b537d0dbf3a38f7f697f6b7b661);
+        
+    
+        var popup_0629a68899b0fd9b8741f8d0e64453b2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1040902c0ea1fea5c25488d17f1b827e = $(`<div id="html_1040902c0ea1fea5c25488d17f1b827e" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 170px; line-height: 1.4;">             <h4 style="margin:0 0 3px 0; color:#ff3e3e;">Deelip Naidu (B+)</h4>             <span style="display:inline-block; font-size:10px; padding:2px 5px; background:#f2f2f2; border-radius:3px; margin-bottom:5px; font-weight:bold;">                 🩸 First Responder             </span><br>             <b>Distance:</b> 9.01 km<br>             <a href="/donor/4" target="_blank" style="display:inline-block; margin-top:6px; background:#222; color:white; text-decoration:none; padding:5px; border-radius:4px; font-size:11px; text-align:center; width:90%; font-weight:bold;">                 👤 View Full Profile             </a>             <button onclick="window.parent.drawRoute(17.6896, 83.2185, 17.725, 83.295)"                      style="margin-top:5px; background:#ff3e3e; color:white; border:none; padding:5px; border-radius:4px; cursor:pointer; font-size:11px; width:100%; font-weight:bold;">                 🗺️ Plot Drive Route             </button>         </div>         </div>`)[0];
+                popup_0629a68899b0fd9b8741f8d0e64453b2.setContent(html_1040902c0ea1fea5c25488d17f1b827e);
+            
+        
+
+        marker_6dde545ac21ee6f34ba04eb75ddbc5ef.bindPopup(popup_0629a68899b0fd9b8741f8d0e64453b2)
+        ;
+
+        
+    
+    
+            var marker_e2dfb7894ed4b37d198c79cbf614041f = L.marker(
+                [17.712, 83.324],
+                {
+  "iconColor": "red",
+}
+            ).addTo(map_c6a44b537d0dbf3a38f7f697f6b7b661);
+        
+    
+        var popup_49397e87949ab6fac3991c2a7069af5d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0a1bf71b43913667a24b2713e660e2c7 = $(`<div id="html_0a1bf71b43913667a24b2713e660e2c7" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 170px; line-height: 1.4;">             <h4 style="margin:0 0 3px 0; color:#ff3e3e;">Kavya Reddi (A+)</h4>             <span style="display:inline-block; font-size:10px; padding:2px 5px; background:#f2f2f2; border-radius:3px; margin-bottom:5px; font-weight:bold;">                 🛡️ Blood Champion             </span><br>             <b>Distance:</b> 11.45 km<br>             <a href="/donor/3" target="_blank" style="display:inline-block; margin-top:6px; background:#222; color:white; text-decoration:none; padding:5px; border-radius:4px; font-size:11px; text-align:center; width:90%; font-weight:bold;">                 👤 View Full Profile             </a>             <button onclick="window.parent.drawRoute(17.6896, 83.2185, 17.712, 83.324)"                      style="margin-top:5px; background:#ff3e3e; color:white; border:none; padding:5px; border-radius:4px; cursor:pointer; font-size:11px; width:100%; font-weight:bold;">                 🗺️ Plot Drive Route             </button>         </div>         </div>`)[0];
+                popup_49397e87949ab6fac3991c2a7069af5d.setContent(html_0a1bf71b43913667a24b2713e660e2c7);
+            
+        
+
+        marker_e2dfb7894ed4b37d198c79cbf614041f.bindPopup(popup_49397e87949ab6fac3991c2a7069af5d)
+        ;
+
+        
+    
+    
+            var marker_d8f819d791c048947dfe16ea7856d94c = L.marker(
+                [18.411462104018685, 83.90319640958695],
+                {
+  "iconColor": "red",
+}
+            ).addTo(map_c6a44b537d0dbf3a38f7f697f6b7b661);
+        
+    
+        var popup_e654e4c9476117721d745f28df72689a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ea652db5e3a4917886697a6759b65b68 = $(`<div id="html_ea652db5e3a4917886697a6759b65b68" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 170px; line-height: 1.4;">             <h4 style="margin:0 0 3px 0; color:#ff3e3e;">user2 (A+)</h4>             <span style="display:inline-block; font-size:10px; padding:2px 5px; background:#f2f2f2; border-radius:3px; margin-bottom:5px; font-weight:bold;">                 🌱 New Donor             </span><br>             <b>Distance:</b> 108.09 km<br>             <a href="/donor/6" target="_blank" style="display:inline-block; margin-top:6px; background:#222; color:white; text-decoration:none; padding:5px; border-radius:4px; font-size:11px; text-align:center; width:90%; font-weight:bold;">                 👤 View Full Profile             </a>             <button onclick="window.parent.drawRoute(17.6896, 83.2185, 18.411462104018685, 83.90319640958695)"                      style="margin-top:5px; background:#ff3e3e; color:white; border:none; padding:5px; border-radius:4px; cursor:pointer; font-size:11px; width:100%; font-weight:bold;">                 🗺️ Plot Drive Route             </button>         </div>         </div>`)[0];
+                popup_e654e4c9476117721d745f28df72689a.setContent(html_ea652db5e3a4917886697a6759b65b68);
+            
+        
+
+        marker_d8f819d791c048947dfe16ea7856d94c.bindPopup(popup_e654e4c9476117721d745f28df72689a)
+        ;
+
+        
+    
+    
+            map_c6a44b537d0dbf3a38f7f697f6b7b661.fitBounds(
+                [[17.6896, 83.2185], [17.6896, 83.2185], [17.712, 83.324], [17.725, 83.295], [17.675, 83.19], [18.411462104018685, 83.90319640958695], [17.683440204834252, 83.19768855621548]],
+                {}
+            );
+        
+    
+            var layer_control_fa5c3e7210756bbf88688677ecfbf5a5_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_38e70c2b9e01b032146d95f00a568777,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_fa5c3e7210756bbf88688677ecfbf5a5 = L.control.layers(
+                layer_control_fa5c3e7210756bbf88688677ecfbf5a5_layers.base_layers,
+                layer_control_fa5c3e7210756bbf88688677ecfbf5a5_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_c6a44b537d0dbf3a38f7f697f6b7b661);
+
+        
+</script>
+</html>

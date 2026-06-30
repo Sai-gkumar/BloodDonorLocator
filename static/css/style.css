@@ -1,0 +1,29 @@
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #fafafa; }
+.navbar { display: flex; justify-content: space-between; background: #222; color: white; padding: 15px 30px; align-items: center; }
+.navbar a { color: white; text-decoration: none; margin: 0 10px; }
+.logo { font-size: 24px; font-weight: bold; color: #ff3e3e !important; }
+.container { padding: 20px; }
+.dashboard-wrapper { display: grid; grid-template-columns: 350px 1fr; gap: 20px; margin-top: 10px; }
+.controls { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); height: 510px; overflow-y: auto; }
+.controls select, .controls input { width: 100%; padding: 10px; margin: 10px 0 20px 0; border: 1px solid #ccc; border-radius: 4px; }
+.donor-card { background: #fff5f5; border-left: 5px solid #ff3e3e; padding: 10px; margin: 10px 0; border-radius: 4px; }
+.auth-box { max-width: 400px; margin: 50px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.auth-box input, .auth-box select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+.auth-box button { width: 100%; padding: 12px; background: #ff3e3e; color: white; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; }
+.geo-btn { background: #28a745 !important; margin-bottom: 10px; }
+
+/* Gamified Badge Stylings */
+.badge-gold { background-color: #fff9e6; color: #b08200; border: 1px solid #ffe194; }
+.badge-silver { background-color: #f1f3f5; color: #495057; border: 1px solid #dee2e6; }
+.badge-bronze { background-color: #fdf2e9; color: #a0522d; border: 1px solid #fadbd8; }
+.badge-new { background-color: #f8f9fa; color: #6c757d; border: 1px solid #e9ecef; }
+
+/* Enhanced card layout properties */
+.donor-card {
+    background: #ffffff;
+    border-left: 5px solid #ff3e3e;
+    padding: 15px;
+    margin: 12px 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}

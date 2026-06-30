@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 40px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 8px solid #ff3e3e;">
+    <div style="text-align: center; margin-bottom: 30px;">
+        <div style="font-size: 60px; margin-bottom: 10px;">🔴</div>
+        <h1 style="margin: 0; color: #222;">{{ donor.name }}</h1>
+        <span class="donor-badge {{ badge.class }}" style="display: inline-block; margin-top: 10px; padding: 6px 15px; font-weight: bold; border-radius: 20px; font-size: 14px;">
+            {{ badge.name }}
+        </span>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 16px;">
+        <tr style="border-bottom: 1px solid #f9f9f9;">
+            <td style="padding: 12px 0; color: #666; font-weight: bold;">Blood Type</td>
+            <td style="padding: 12px 0; text-align: right; color: #ff3e3e; font-size: 20px; font-weight: bold;">{{ donor.blood_group }}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #f9f9f9;">
+            <td style="padding: 12px 0; color: #666; font-weight: bold;">Total Donations Count</td>
+            <td style="padding: 12px 0; text-align: right; font-weight: bold; color: #333;">{{ donor.donation_count }} Times</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #f9f9f9;">
+            <td style="padding: 12px 0; color: #666; font-weight: bold;">Contact Number</td>
+            <td style="padding: 12px 0; text-align: right;"><a href="tel:{{ donor.phone }}" style="color: #28a745; text-decoration: none; font-weight: bold;">📞 {{ donor.phone }}</a></td>
+        </tr>
+        <tr style="border-bottom: 1px solid #f9f9f9;">
+            <td style="padding: 12px 0; color: #666; font-weight: bold;">Email Address</td>
+            <td style="padding: 12px 0; text-align: right; color: #555;">{{ donor.email }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 12px 0; color: #666; font-weight: bold;">Availability Status</td>
+            <td style="padding: 12px 0; text-align: right; font-weight: bold; color: #28a745;">
+                {{ "🟢 Active & Available" if donor.is_available == 1 else "🔴 Temporarily Unavailable" }}
+            </td>
+        </tr>
+    </table>
+
+    <div style="text-align: center; margin-top: 35px;">
+        <a href="/" style="text-decoration: none; background: #eef2f5; color: #495057; padding: 10px 20px; border-radius: 6px; font-weight: bold; display: inline-block;">
+            ⬅️ Back to Main Live Map
+        </a>
+    </div>
+</div>
+{% endblock %}

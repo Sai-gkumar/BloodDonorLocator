@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="padding: 20px;">
+    <h2>Admin Management Dashboard Control Panel</h2>
+    
+    <div style="background: #f8f9fa; border: 1px solid #dee2e6; padding: 20px; border-radius: 6px; margin-bottom: 30px; border-left: 5px solid #ffc107;">
+        <h3 style="margin-top: 0; color: #333;">📢 Dispatch Emergency Blood Shortage Notification</h3>
+        <p style="font-size: 13px; color: #666;">Simulate sending an urgent SMS/Email broadcast ping to all active matching systemic candidates.</p>
+        <form method="POST" action="/admin">
+            <textarea name="broadcast_msg" rows="3" placeholder="Example: CRITICAL ALERT: O+ Blood shortage emergency at City Hospital. Please review map routes..." required style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit; box-sizing: border-box;"></textarea>
+            <button type="submit" style="margin-top: 10px; padding: 10px 20px; background: #212529; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
+                Send Notification Broadcast
+            </button>
+        </form>
+    </div>
+
+    <h3>👥 Manage Registered Blood Donors</h3>
+    <table style="width:100%; border-collapse: collapse; margin-top: 15px; text-align: left; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+        <thead>
+            <tr style="background-color: #212529; color: white;">
+                <th style="padding: 12px;">ID</th>
+                <th style="padding: 12px;">Name</th>
+                <th style="padding: 12px;">Email</th>
+                <th style="padding: 12px;">Blood Type</th>
+                <th style="padding: 12px;">Phone</th>
+                <th style="padding: 12px;">Status</th>
+                <th style="padding: 12px; text-align: center;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donor in donors %}
+            <tr style="border-bottom: 1px solid #dee2e6;">
+                <td style="padding: 12px;">{{ donor.id }}</td>
+                <td style="padding: 12px; font-weight: bold;">{{ donor.name }}</td>
+                <td style="padding: 12px;">{{ donor.email }}</td>
+                <td style="padding: 12px; color: #d32f2f; font-weight: bold;">{{ donor.blood_group }}</td>
+                <td style="padding: 12px;">{{ donor.phone }}</td>
+                <td style="padding: 12px;">
+                    <span style="padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; background: {{ '#d4edda; color: #155724;' if donor.is_available == 1 else '#f8d7da; color: #721c24;' }}">
+                        {{ "Available" if donor.is_available == 1 else "Unavailable" }}
+                    </span>
+                </td>
+                <td style="padding: 12px; text-align: center;">
+                    <a href="/admin?action=toggle_status&id={{ donor.id }}" style="text-decoration: none; padding: 5px 10px; background: #007bff; color: white; border-radius: 4px; font-size: 12px; font-weight: bold; margin-right: 5px;">
+                        🔄 Toggle Status
+                    </a>
+                    <a href="/admin?action=delete&id={{ donor.id }}" onclick="return confirm('Are you sure you want to delete this donor?')" style="text-decoration: none; padding: 5px 10px; background: #dc3545; color: white; border-radius: 4px; font-size: 12px; font-weight: bold;">
+                        🗑️ Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor ]}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

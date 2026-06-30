@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<div class="auth-wrapper" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px auto; max-width: 1000px; padding: 20px;">
+    
+    <div class="auth-box" style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); height: fit-content;">
+        <h2>Register as a Blood Donor</h2>
+        <form method="POST" action="/register" id="registerForm">
+            <input type="text" name="name" placeholder="Full Name" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+            <input type="email" name="email" placeholder="Email Address" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+            <input type="password" name="password" placeholder="Password" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+            <input type="text" name="phone" placeholder="Phone Number" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+            
+            <label style="display:block; margin-top:10px; font-weight: bold;">Blood Group:</label>
+            <select name="blood_group" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ccc; border-radius:4px;">
+                <option value="A+">A+</option><option value="A-">A-</option>
+                <option value="B+">B+</option><option value="B-">B-</option>
+                <option value="O+">O+</option><option value="O-">O-</option>
+                <option value="AB+">AB+</option><option value="AB-">AB-</option>
+            </select>
+
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+
+            <div style="background: #eef7ff; padding: 12px; border-radius: 4px; margin: 15px 0; border-left: 4px solid #007bff;">
+                <p style="margin:0; font-size: 14px; color: #333; line-height: 1.4;">
+                    📌 <b>Location Status:</b> <span id="geo-status" style="font-weight:bold; color:#ff3e3e;">Location required. Please search or click on the map.</span>
+                </p>
+            </div>
+
+            <button type="submit" id="submit-btn" style="width:100%; padding:12px; background-color: #ff3e3e; color:white; border:none; border-radius:4px; font-size:16px; font-weight:bold; cursor:pointer;" disabled>
+                Register Profile
+            </button>
+        </form>
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+        <h3 style="margin-top: 0;">📍 Pin Your Availability Location</h3>
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+            <input type="text" id="customAddressSearch" placeholder="Type your area, district, or city name..." 
+                   style="flex-grow: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
+            <button type="button" onclick="searchCustomAddress()" 
+                    style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 14px;">
+                Search Area
+            </button>
+        </div>
+
+        <button type="button" onclick="locateMe()" style="padding: 10px; background: #28a745; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; margin-bottom: 12px; font-size: 14px;">
+            🎯 Use My Current Live Location
+        </button>
+        
+        <div id="reg-map" style="height: 380px; width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #ccc;"></div>
+    </div>
+</div>
+
+<script>
+let regMap;
+let selectionMarker;
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Initialize map centered broadly over India baseline coordinates
+    regMap = L.map('reg-map').setView([20.5937, 78.9629], 5);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(regMap);
+
+    // Allow location selection by clicking directly anywhere on the map grid canvas
+    regMap.on('click', function(e) {
+        updateMarkerLocation(e.latlng.lat, e.latlng.lng);
+    });
+
+    // Handle pressing Enter inside the search field box smoothly
+    document.getElementById('customAddressSearch').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            searchCustomAddress();
+        }
+    });
+});
+
+// Native REST Fetch Geocoder Function (Fixes freezing issues completely)
+function searchCustomAddress() {
+    const query = document.getElementById('customAddressSearch').value;
+    if (!query) {
+        alert("Please enter a city or area to search.");
+        return;
+    }
+    
+    const statusText = document.getElementById('geo-status');
+    statusText.innerText = "Searching area maps...";
+    statusText.style.color = '#007bff';
+
+    // Direct HTTP call using the standard fetch API protocol with clean request formats
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.length > 0) {
+                const lat = parseFloat(data[0].lat);
+                const lon = parseFloat(data[0].lon);
+                
+                // Focus map onto the result location point coordinates
+                regMap.setView([lat, lon], 14);
+                updateMarkerLocation(lat, lon);
+            } else {
+                alert("No results found. Try entering a nearby major landmark or city name.");
+                statusText.innerText = "Location look up failed. Drop pin manually.";
+                statusText.style.color = '#ff3e3e';
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Network connection error while looking up maps. Try manual placement.");
+            statusText.innerText = "Connection error. Select manually on map.";
+            statusText.style.color = '#ff3e3e';
+        });
+}
+
+function updateMarkerLocation(lat, lng) {
+    if (selectionMarker) {
+        selectionMarker.setLatLng([lat, lng]);
+    } else {
+        selectionMarker = L.marker([lat, lng], { draggable: true }).addTo(regMap);
+        
+        selectionMarker.on('dragend', function() {
+            let position = selectionMarker.getLatLng();
+            updateFormFields(position.lat, position.lng);
+        });
+    }
+    updateFormFields(lat, lng);
+}
+
+function updateFormFields(lat, lng) {
+    document.getElementById('latitude').value = lat;
+    document.getElementById('longitude').value = lng;
+    
+    const statusText = document.getElementById('geo-status');
+    statusText.innerText = `Location Locked: (${lat.toFixed(5)}, ${lng.toFixed(5)})`;
+    statusText.style.color = '#28a745';
+    
+    document.getElementById('submit-btn').disabled = false;
+}
+
+function locateMe() {
+    if (navigator.geolocation) {
+        document.getElementById('geo-status').innerText = "Fetching live GPS parameters...";
+        document.getElementById('geo-status').style.color = '#007bff';
+        
+        navigator.geolocation.getCurrentPosition(position => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            regMap.setView([lat, lng], 15);
+            updateMarkerLocation(lat, lng);
+        }, (error) => {
+            alert("Live tracking permission denied. Please use the manual address search bar.");
+            document.getElementById('geo-status').innerText = "Tracking failed. Use manual search.";
+            document.getElementById('geo-status').style.color = '#ff3e3e';
+        });
+    } else {
+        alert("Geolocation features are unsupported by this browser.");
+    }
+}
+</script>
+{% endblock %}
