@@ -9,6 +9,7 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for, s
 import sqlite3
 import math
 import leafmap.foliumap as leafmap
+import setuptools
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key_for_session_management'
