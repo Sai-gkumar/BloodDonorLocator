@@ -10,13 +10,6 @@ plotly==6.8.0
 leafmap==0.30.0
 folium==0.20.0
 branca==0.8.2
-jupyterlab_widgets==3.0.16
-ipywidgets==8.1.8
-ipyleaflet==0.20.0
-ipytree==0.2.2
-ipyevents==2.0.4
-ipyfilechooser==0.6.0
-jupyter-leaflet==0.20.0
 
 requests==2.34.2
 urllib3==2.7.0
@@ -30,7 +23,6 @@ filelock==3.29.4
 soupsieve==2.8.4
 beautifulsoup4==4.15.0
 
-# Optional but recommended for stability
 jsonschema==4.26.0
 attrs==26.1.0
 typing-extensions==4.15.0
