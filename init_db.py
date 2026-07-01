@@ -1,3 +1,13 @@
+import subprocess
+import sys
+
+# Force-inject setuptools and fallback resource modules at the environment level
+try:
+    import pkg_resources
+except ImportError:
+    print("🔧 Injecting deployment dependencies...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "setuptools==69.5.1"])
+
 import sqlite3
 
 def init_db():
